@@ -1,0 +1,9 @@
+data/
+# Ignore Database Data
+**/data/
+**/mysql/data/
+**/mongodb/
+**/*.wt
+**/*.sdi
+**/*.ibd
+**/*.log
