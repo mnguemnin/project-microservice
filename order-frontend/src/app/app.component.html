@@ -1,0 +1,11 @@
+<h2>Products</h2>
+
+<p *ngIf="loading">Loading products…</p>
+<p *ngIf="error">{{ error }}</p>
+
+<ul *ngIf="!loading && !error">
+  <li *ngFor="let product of products">
+    <strong>{{ product.name }}</strong> ({{ product.skuCode }}) - {{ product.price | currency }}
+    <p>{{ product.description }}</p>
+  </li>
+</ul>

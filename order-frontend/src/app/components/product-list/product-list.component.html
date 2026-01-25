@@ -1,0 +1,28 @@
+<h2>Products</h2>
+<a routerLink="/products/new" class="btn">Add Product</a>
+
+<table *ngIf="products.length; else loading">
+  <thead>
+  <tr>
+    <th>SKU</th>
+    <th>Name</th>
+    <th>Price</th>
+    <th>Actions</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let product of products">
+    <td>{{ product.skuCode }}</td>
+    <td>{{ product.name }}</td>
+    <td>{{ product.price | currency }}</td>
+    <td>
+      <a [routerLink]="['/products', product.id]">View</a> |
+      <a [routerLink]="['/products', product.id, 'edit']">Edit</a>
+    </td>
+  </tr>
+  </tbody>
+</table>
+
+<ng-template #loading>
+  <p>Loading products…</p>
+</ng-template>
