@@ -24,7 +24,7 @@ public class ProductController {
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
     public List<ProductResponse> getAllProducts() throws InterruptedException {
-        Thread.sleep(5000);
+        //Thread.sleep(5000);
         return productService.getAllProducts();
     }
 }

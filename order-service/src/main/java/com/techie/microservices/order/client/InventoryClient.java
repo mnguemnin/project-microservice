@@ -3,6 +3,7 @@ package com.techie.microservices.order.client;
 import groovy.util.logging.Slf4j;
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import io.github.resilience4j.retry.annotation.Retry;
+import io.micrometer.tracing.annotation.SpanTag;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.cloud.openfeign.FeignClient;
@@ -21,7 +22,8 @@ public interface InventoryClient {
     @CircuitBreaker(name = "inventory", fallbackMethod = "fallbackMethod")
     @Retry(name = "inventory")
     @RequestMapping(method = RequestMethod.GET, value = "/api/inventory")
-    boolean isInStock(@RequestParam String skuCode, @RequestParam Integer quantity);
+    boolean isInStock( @SpanTag("sku.code") @RequestParam String skuCode,
+                       @SpanTag("sku.quantity") @RequestParam Integer quantity);
 
     default boolean fallbackMethod(String code, Integer quantity, Throwable throwable) {
         log.info("Cannot get inventory for skucode {}, failure reason: {}", code, throwable.getMessage());
