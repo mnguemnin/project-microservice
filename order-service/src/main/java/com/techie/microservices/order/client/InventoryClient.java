@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.service.annotation.GetExchange;
 
 @Slf4j
-@FeignClient(value = "inventory", url="http://localhost:8082")
+@FeignClient(value = "inventory", url="${inventory.service.url}")
 public interface InventoryClient {
 
     Logger log = LoggerFactory.getLogger(InventoryClient.class);
