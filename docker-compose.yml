@@ -110,10 +110,12 @@ services:
       - ./docker/tempo/tempo.yml:/etc/tempo.yaml:ro
       - ./data/tempo:/tmp/tempo
     ports:
-      - "3200:3200"   # HTTP (Matches your logs)
-      - "9095:9095"   # gRPC
-      - "9411:9411"   # Zipkin (Matches your receivers)
-    user: "root"      # Fixes the "unowned file entry" permission error in your logs
+      - "3200:3200"   # Tempo HTTP / Grafana datasource
+      - "9411:9411"   # Zipkin
+      - "4317:4317"   # OTLP gRPC
+      - "4318:4318"   # OTLP HTTP
+      - "9095:9095"   # Metrics / service graph gRPC
+
 
   grafana:
     image: grafana/grafana:10.1.0
